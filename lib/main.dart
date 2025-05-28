@@ -87,195 +87,231 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.all(8),
-                child: Row(
+          Padding(
+            padding: EdgeInsets.all(8),
+            child: Row(
+              children: [
+                Text(
+                  "PEA VOLTA บางจาก นาโคก (ขาออก #1)",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: kPrimaryPurple,
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          Expanded(
+            child: Scrollbar(
+              thumbVisibility: true,
+              child: SingleChildScrollView(
+                child: Column(
                   children: [
-                    Text(
-                      "PEA VOLTA บางจาก นาโคก (ขาออก #1)",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: kPrimaryPurple,
-                      ),
+                    Column(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(8),
+                          color: Colors.white,
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        FractionallySizedBox(
+                                          widthFactor: 0.3,
+                                          child: Image.asset(
+                                            'assets/images/battery.png',
+                                          ),
+                                        ),
+                                        Text(
+                                          "%แบตเตอรี่",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: kPrimaryPurple,
+                                          ),
+                                        ),
+                                        Text(
+                                          "50 %",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: kPrimaryPurple,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Column(
+                                      children: [
+                                        FractionallySizedBox(
+                                          widthFactor: 0.3,
+                                          child: Image.asset(
+                                            'assets/images/battery.png',
+                                          ),
+                                        ),
+                                        Text(
+                                          "กำลังไฟฟ้า",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: kPrimaryPurple,
+                                          ),
+                                        ),
+                                        Text(
+                                          "11 kW",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: kPrimaryPurple,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  FractionallySizedBox(
+                                    widthFactor: 0.4,
+                                    child: Image.asset('assets/images/car.png'),
+                                  ),
+                                  Text(
+                                    "หากต้องการหยุดชาร์จ",
+                                    style: TextStyle(
+                                      color: kPrimaryPurple,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                  Text(
+                                    "กรุณากดปุ่ม \"หยุดการชาร์จ\" ก่อนถอดหัวชาร์จ ",
+                                    style: TextStyle(
+                                      color: kPrimaryPurple,
+                                      fontWeight: FontWeight.w100,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: 8),
+                        Container(
+                          padding: EdgeInsets.all(8),
+                          color: Colors.white,
+                          child: Column(
+                            //crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text("รายละเอียดการชาร์จ"),
+                              ),
+                              SizedBox(height: 8),
+
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    flex: 1,
+                                    child: Image.asset(
+                                      'assets/images/electric.png',
+                                    ),
+                                  ),
+                                  Expanded(flex: 7, child: Text("สถานีชาร์จ")),
+                                  Expanded(
+                                    flex: 6,
+                                    child: Text(
+                                      "PEA VOLTA บางจาก นาโคก (ขาออก #1)",
+                                      textAlign: TextAlign.right,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 8),
+
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    flex: 1,
+                                    child: Image.asset(
+                                      'assets/images/electric.png',
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 7,
+                                    child: Text("ประเภทหัวชาร์จ"),
+                                  ),
+                                  Expanded(
+                                    flex: 6,
+                                    child: Text(
+                                      "CCS2",
+                                      textAlign: TextAlign.right,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 8),
+
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    flex: 1,
+                                    child: Image.asset(
+                                      'assets/images/electric.png',
+                                    ),
+                                  ),
+                                  Expanded(flex: 7, child: Text("กำลังไฟฟ้า")),
+                                  Expanded(
+                                    flex: 6,
+                                    child: Text(
+                                      "50 kW",
+                                      textAlign: TextAlign.right,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 8),
+
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    flex: 1,
+                                    child: Image.asset(
+                                      'assets/images/electric.png',
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 7,
+                                    child: Text("ระยะเวลาการชาร์จ"),
+                                  ),
+                                  Expanded(
+                                    flex: 6,
+                                    child: Text(
+                                      "00:03:19",
+                                      textAlign: TextAlign.right,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
               ),
-
-              Column(
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(8),
-                    color: Colors.white,
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  FractionallySizedBox(
-                                    widthFactor: 0.3,
-                                    child: Image.asset(
-                                      'assets/images/battery.png',
-                                    ),
-                                  ),
-                                  Text(
-                                    "%แบตเตอรี่",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(color: kPrimaryPurple),
-                                  ),
-                                  Text(
-                                    "50 %",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(color: kPrimaryPurple),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Expanded(
-                              child: Column(
-                                children: [
-                                  FractionallySizedBox(
-                                    widthFactor: 0.3,
-                                    child: Image.asset(
-                                      'assets/images/battery.png',
-                                    ),
-                                  ),
-                                  Text(
-                                    "กำลังไฟฟ้า",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(color: kPrimaryPurple),
-                                  ),
-                                  Text(
-                                    "11 kW",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(color: kPrimaryPurple),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            FractionallySizedBox(
-                              widthFactor: 0.4,
-                              child: Image.asset('assets/images/car.png'),
-                            ),
-                            Text(
-                              "หากต้องการหยุดชาร์จ",
-                              style: TextStyle(
-                                color: kPrimaryPurple,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                              ),
-                            ),
-                            Text(
-                              "กรุณากดปุ่ม \"หยุดการชาร์จ\" ก่อนถอดหัวชาร์จ ",
-                              style: TextStyle(
-                                color: kPrimaryPurple,
-                                fontWeight: FontWeight.w100,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 8),
-                  Container(
-                    padding: EdgeInsets.all(8),
-                    color: Colors.white,
-                    child: Column(
-                      //crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text("รายละเอียดการชาร์จ"),
-                        ),
-                        SizedBox(height: 8),
-
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Image.asset('assets/images/electric.png'),
-                            ),
-                            Expanded(flex: 7, child: Text("สถานีชาร์จ")),
-                            Expanded(
-                              flex: 6,
-                              child: Text(
-                                "PEA VOLTA บางจาก นาโคก (ขาออก #1)",
-                                textAlign: TextAlign.right,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 8),
-
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Image.asset('assets/images/electric.png'),
-                            ),
-                            Expanded(flex: 7, child: Text("ประเภทหัวชาร์จ")),
-                            Expanded(
-                              flex: 6,
-                              child: Text("CCS2", textAlign: TextAlign.right),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 8),
-
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Image.asset('assets/images/electric.png'),
-                            ),
-                            Expanded(flex: 7, child: Text("กำลังไฟฟ้า")),
-                            Expanded(
-                              flex: 6,
-                              child: Text("50 kW", textAlign: TextAlign.right),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 8),
-
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Image.asset('assets/images/electric.png'),
-                            ),
-                            Expanded(flex: 7, child: Text("ระยะเวลาการชาร์จ")),
-                            Expanded(
-                              flex: 6,
-                              child: Text(
-                                "00:03:19",
-                                textAlign: TextAlign.right,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ],
+            ),
           ),
           Column(
             children: [
