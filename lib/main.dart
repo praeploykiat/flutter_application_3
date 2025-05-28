@@ -58,7 +58,29 @@ class MyHomePage extends StatefulWidget {
 
 const Color kPrimaryPurple = Color.fromRGBO(103, 37, 113, 1);
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 2),
+    )..repeat(reverse: true);
+    _animation = Tween<double>(
+      begin: 0.8,
+      end: 1,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -178,10 +200,40 @@ class _MyHomePageState extends State<MyHomePage> {
                               ),
                               Column(
                                 children: [
-                                  FractionallySizedBox(
-                                    widthFactor: 0.4,
-                                    child: Image.asset('assets/images/car.png'),
+                                  // FractionallySizedBox(
+                                  //   widthFactor: 0.4,
+                                  //   child: Image.asset('assets/images/car.png'),
+                                  // ),
+                                  Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      AnimatedBuilder(
+                                        animation: _animation,
+                                        builder: (context, child) {
+                                          return Transform.scale(
+                                            scale: _animation.value,
+                                            child: CircleAvatar(
+                                              backgroundColor:
+                                                  const Color.fromARGB(
+                                                    255,
+                                                    64,
+                                                    242,
+                                                    215,
+                                                  ),
+                                              radius: 80,
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                      FractionallySizedBox(
+                                        widthFactor: 0.4,
+                                        child: Image.asset(
+                                          'assets/images/car.png',
+                                        ),
+                                      ),
+                                    ],
                                   ),
+
                                   Text(
                                     "หากต้องการหยุดชาร์จ",
                                     style: TextStyle(
