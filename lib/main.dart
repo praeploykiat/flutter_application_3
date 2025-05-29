@@ -59,6 +59,7 @@ class MyHomePage extends StatefulWidget {
 const Color kPrimaryPurple = Color.fromRGBO(103, 37, 113, 1);
 
 class _MyHomePageState extends State<MyHomePage> {
+  int batteryPercent = 0;
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -139,10 +140,16 @@ class _MyHomePageState extends State<MyHomePage> {
                                           ),
                                         ),
                                         Text(
-                                          "50 %",
+                                          "$batteryPercent %",
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
-                                            color: kPrimaryPurple,
+                                            color: batteryPercent <= 10
+                                                ? Colors.red
+                                                : batteryPercent <= 30
+                                                ? Colors.orange
+                                                : batteryPercent <= 80
+                                                ? Colors.yellow
+                                                : Colors.green,
                                           ),
                                         ),
                                       ],
@@ -313,8 +320,28 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
           ),
+
           Column(
             children: [
+              Padding(
+                padding: EdgeInsets.all(8),
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: FloatingActionButton(
+                    onPressed: () {
+                      setState(() {
+                        if (batteryPercent < 100) batteryPercent += 1;
+                      });
+                    },
+                    backgroundColor: const Color.fromARGB(255, 176, 255, 239),
+                    shape: CircleBorder(),
+                    child: Icon(
+                      Icons.electric_bolt,
+                      color: Color.fromARGB(255, 45, 217, 182),
+                    ),
+                  ),
+                ),
+              ),
               ElevatedButton(
                 onPressed: () {
                   log("Button Pressed");
