@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:developer';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:carousel_indicator/carousel_indicator.dart';
 
 void main() {
   runApp(const MyApp());
@@ -60,6 +62,12 @@ const Color kPrimaryPurple = Color.fromRGBO(103, 37, 113, 1);
 
 class _MyHomePageState extends State<MyHomePage> {
   int batteryPercent = 0;
+  int _current = 0;
+  final List<String> imgList = [
+    'assets/images/car1.png',
+    'assets/images/car2.png',
+    'assets/images/car3.png',
+  ];
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -185,10 +193,29 @@ class _MyHomePageState extends State<MyHomePage> {
                               ),
                               Column(
                                 children: [
-                                  FractionallySizedBox(
-                                    widthFactor: 0.4,
-                                    child: Image.asset('assets/images/car.png'),
+                                  CarouselSlider(
+                                    items: imgList.map((path) {
+                                      return FractionallySizedBox(
+                                        widthFactor: 1,
+                                        child: Image.asset(path),
+                                      );
+                                    }).toList(),
+                                    options: CarouselOptions(
+                                      height: 150,
+                                      //autoPlay: true,
+                                      onPageChanged: (index, reason) {
+                                        setState(() {
+                                          _current = index;
+                                        });
+                                      },
+                                    ),
                                   ),
+                                  CarouselIndicator(
+                                    color: Colors.grey,
+                                    index: _current,
+                                    count: imgList.length,
+                                  ),
+                                  SizedBox(height: 8),
                                   Text(
                                     "หากต้องการหยุดชาร์จ",
                                     style: TextStyle(
