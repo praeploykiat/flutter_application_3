@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'dart:developer';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:carousel_indicator/carousel_indicator.dart';
-import '../services/news_service.dart';
+import 'package:flutter_application_3/pages/news_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -69,20 +69,20 @@ class _MyHomePageState extends State<MyHomePage> {
     'assets/images/car2.png',
     'assets/images/car3.png',
   ];
-  List<dynamic> newsList = [];
+  // List<dynamic> newsList = [];
 
-  @override
-  void initState() {
-    super.initState();
-    loadNews();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   loadNews();
+  // }
 
-  void loadNews() async {
-    final news = await NewsService.fetchNews();
-    setState(() {
-      newsList = news;
-    });
-  }
+  // void loadNews() async {
+  //   final news = await NewsService.fetchNews();
+  //   setState(() {
+  //     newsList = news;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -130,257 +130,262 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
 
-          // Expanded(
-          //   child:
-          Scrollbar(
-            thumbVisibility: true,
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Column(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(8),
-                        color: Colors.white,
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      FractionallySizedBox(
-                                        widthFactor: 0.3,
-                                        child: Image.asset(
-                                          'assets/images/battery.png',
+          Expanded(
+            child: Scrollbar(
+              thumbVisibility: true,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Column(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(8),
+                          color: Colors.white,
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        FractionallySizedBox(
+                                          widthFactor: 0.3,
+                                          child: Image.asset(
+                                            'assets/images/battery.png',
+                                          ),
                                         ),
-                                      ),
-                                      Text(
-                                        "%แบตเตอรี่",
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(color: kPrimaryPurple),
-                                      ),
-                                      Text(
-                                        "$batteryPercent %",
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          color: batteryPercent <= 10
-                                              ? Colors.red
-                                              : batteryPercent <= 30
-                                              ? Colors.orange
-                                              : batteryPercent <= 80
-                                              ? Colors.yellow
-                                              : Colors.green,
+                                        Text(
+                                          "%แบตเตอรี่",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: kPrimaryPurple,
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Column(
-                                    children: [
-                                      FractionallySizedBox(
-                                        widthFactor: 0.3,
-                                        child: Image.asset(
-                                          'assets/images/battery.png',
+                                        Text(
+                                          "$batteryPercent %",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: batteryPercent <= 10
+                                                ? Colors.red
+                                                : batteryPercent <= 30
+                                                ? Colors.orange
+                                                : batteryPercent <= 80
+                                                ? Colors.yellow
+                                                : Colors.green,
+                                          ),
                                         ),
-                                      ),
-                                      Text(
-                                        "กำลังไฟฟ้า",
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(color: kPrimaryPurple),
-                                      ),
-                                      Text(
-                                        "11 kW",
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(color: kPrimaryPurple),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                CarouselSlider(
-                                  items: imgList.map((path) {
-                                    return FractionallySizedBox(
-                                      widthFactor: 1,
-                                      child: Image.asset(path),
-                                    );
-                                  }).toList(),
-                                  options: CarouselOptions(
-                                    height: 150,
-                                    //autoPlay: true,
-                                    onPageChanged: (index, reason) {
-                                      setState(() {
-                                        _current = index;
-                                      });
-                                    },
+                                  Expanded(
+                                    child: Column(
+                                      children: [
+                                        FractionallySizedBox(
+                                          widthFactor: 0.3,
+                                          child: Image.asset(
+                                            'assets/images/battery.png',
+                                          ),
+                                        ),
+                                        Text(
+                                          "กำลังไฟฟ้า",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: kPrimaryPurple,
+                                          ),
+                                        ),
+                                        Text(
+                                          "11 kW",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: kPrimaryPurple,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                CarouselIndicator(
-                                  color: Colors.grey,
-                                  index: _current,
-                                  count: imgList.length,
-                                ),
-                                SizedBox(height: 8),
-                                Text(
-                                  "หากต้องการหยุดชาร์จ",
-                                  style: TextStyle(
-                                    color: kPrimaryPurple,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  CarouselSlider(
+                                    items: imgList.map((path) {
+                                      return FractionallySizedBox(
+                                        widthFactor: 1,
+                                        child: Image.asset(path),
+                                      );
+                                    }).toList(),
+                                    options: CarouselOptions(
+                                      height: 150,
+                                      //autoPlay: true,
+                                      onPageChanged: (index, reason) {
+                                        setState(() {
+                                          _current = index;
+                                        });
+                                      },
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  "กรุณากดปุ่ม \"หยุดการชาร์จ\" ก่อนถอดหัวชาร์จ ",
-                                  style: TextStyle(
-                                    color: kPrimaryPurple,
-                                    fontWeight: FontWeight.w100,
+                                  CarouselIndicator(
+                                    color: Colors.grey,
+                                    index: _current,
+                                    count: imgList.length,
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                  SizedBox(height: 8),
+                                  Text(
+                                    "หากต้องการหยุดชาร์จ",
+                                    style: TextStyle(
+                                      color: kPrimaryPurple,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                  Text(
+                                    "กรุณากดปุ่ม \"หยุดการชาร์จ\" ก่อนถอดหัวชาร์จ ",
+                                    style: TextStyle(
+                                      color: kPrimaryPurple,
+                                      fontWeight: FontWeight.w100,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 8),
-                      Container(
-                        padding: EdgeInsets.all(8),
-                        color: Colors.white,
-                        child: Column(
-                          //crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text("รายละเอียดการชาร์จ"),
-                            ),
-                            SizedBox(height: 8),
+                        SizedBox(height: 8),
+                        Container(
+                          padding: EdgeInsets.all(8),
+                          color: Colors.white,
+                          child: Column(
+                            //crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text("รายละเอียดการชาร์จ"),
+                              ),
+                              SizedBox(height: 8),
 
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  flex: 1,
-                                  child: Image.asset(
-                                    'assets/images/electric.png',
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    flex: 1,
+                                    child: Image.asset(
+                                      'assets/images/electric.png',
+                                    ),
                                   ),
-                                ),
-                                Expanded(flex: 7, child: Text("สถานีชาร์จ")),
-                                Expanded(
-                                  flex: 6,
-                                  child: Text(
-                                    "PEA VOLTA บางจาก นาโคก (ขาออก #1)",
-                                    textAlign: TextAlign.right,
+                                  Expanded(flex: 7, child: Text("สถานีชาร์จ")),
+                                  Expanded(
+                                    flex: 6,
+                                    child: Text(
+                                      "PEA VOLTA บางจาก นาโคก (ขาออก #1)",
+                                      textAlign: TextAlign.right,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 8),
+                                ],
+                              ),
+                              SizedBox(height: 8),
 
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  flex: 1,
-                                  child: Image.asset(
-                                    'assets/images/electric.png',
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    flex: 1,
+                                    child: Image.asset(
+                                      'assets/images/electric.png',
+                                    ),
                                   ),
-                                ),
-                                Expanded(
-                                  flex: 7,
-                                  child: Text("ประเภทหัวชาร์จ"),
-                                ),
-                                Expanded(
-                                  flex: 6,
-                                  child: Text(
-                                    "CCS2",
-                                    textAlign: TextAlign.right,
+                                  Expanded(
+                                    flex: 7,
+                                    child: Text("ประเภทหัวชาร์จ"),
                                   ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 8),
+                                  Expanded(
+                                    flex: 6,
+                                    child: Text(
+                                      "CCS2",
+                                      textAlign: TextAlign.right,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 8),
 
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  flex: 1,
-                                  child: Image.asset(
-                                    'assets/images/electric.png',
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    flex: 1,
+                                    child: Image.asset(
+                                      'assets/images/electric.png',
+                                    ),
                                   ),
-                                ),
-                                Expanded(flex: 7, child: Text("กำลังไฟฟ้า")),
-                                Expanded(
-                                  flex: 6,
-                                  child: Text(
-                                    "50 kW",
-                                    textAlign: TextAlign.right,
+                                  Expanded(flex: 7, child: Text("กำลังไฟฟ้า")),
+                                  Expanded(
+                                    flex: 6,
+                                    child: Text(
+                                      "50 kW",
+                                      textAlign: TextAlign.right,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 8),
+                                ],
+                              ),
+                              SizedBox(height: 8),
 
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  flex: 1,
-                                  child: Image.asset(
-                                    'assets/images/electric.png',
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    flex: 1,
+                                    child: Image.asset(
+                                      'assets/images/electric.png',
+                                    ),
                                   ),
-                                ),
-                                Expanded(
-                                  flex: 7,
-                                  child: Text("ระยะเวลาการชาร์จ"),
-                                ),
-                                Expanded(
-                                  flex: 6,
-                                  child: Text(
-                                    "00:03:19",
-                                    textAlign: TextAlign.right,
+                                  Expanded(
+                                    flex: 7,
+                                    child: Text("ระยะเวลาการชาร์จ"),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                  Expanded(
+                                    flex: 6,
+                                    child: Text(
+                                      "00:03:19",
+                                      textAlign: TextAlign.right,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-          //),
           // SizedBox(
           //   height: 200,
-          Expanded(
-            child: newsList.isNotEmpty
-                ? ListView.builder(
-                    itemCount: newsList.length.clamp(0, 3),
-                    itemBuilder: (context, index) {
-                      final news = newsList[index];
-                      return Container(
-                        margin: EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 6,
-                        ),
-                        decoration: BoxDecoration(color: Colors.grey),
-                        child: ListTile(
-                          title: Text(news['title'] ?? ''),
-                          subtitle: Text(news['description'] ?? ''),
-                        ),
-                      );
-                    },
-                  )
-                : Center(child: CircularProgressIndicator()),
-          ),
+          // Expanded(
+          //   child: newsList.isNotEmpty
+          //       ? ListView.builder(
+          //           itemCount: newsList.length.clamp(0, 3),
+          //           itemBuilder: (context, index) {
+          //             final news = newsList[index];
+          //             return Container(
+          //               margin: EdgeInsets.symmetric(
+          //                 horizontal: 12,
+          //                 vertical: 6,
+          //               ),
+          //               decoration: BoxDecoration(color: Colors.grey),
+          //               child: ListTile(
+          //                 title: Text(news['title'] ?? ''),
+          //                 subtitle: Text(news['description'] ?? ''),
+          //               ),
+          //             );
+          //           },
+          //         )
+          //       : Center(child: CircularProgressIndicator()),
+          // ),
           Column(
             children: [
               Padding(
@@ -416,6 +421,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               SizedBox(height: 8),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => NewsPage()),
+                  );
+                },
+                child: Text("ดูข่าวเพิ่มเติม"),
+              ),
             ],
           ),
         ],
